@@ -60,6 +60,7 @@ namespace CategoryProductConsoleApp
             {
                 AnsiConsole.Clear();
                 AnsiConsole.MarkupLine("[red]Failed to create and populated[/]");
+                Console.WriteLine(exception.Message);
             }
 
             AnsiConsole.MarkupLine("[yellow]Press a key to continue[/]");
