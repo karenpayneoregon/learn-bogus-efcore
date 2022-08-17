@@ -1,7 +1,3 @@
 ﻿# About
 
-Base class project setup for C#9, .NET Core 5
-
-![image](assets/Versions.png)
-
-![img](assets/core_csharp_shield.png)
+Contains EF Core models and code to mocked up data to place in a newly created database using Bogus library.
