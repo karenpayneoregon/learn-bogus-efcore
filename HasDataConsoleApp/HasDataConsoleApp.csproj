@@ -29,6 +29,9 @@
 		<PackageReference Include="ConfigurationLibrary" Version="1.0.1" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\SpectreConsoleHelperLibrary\SpectreConsoleHelperLibrary.csproj" />
+	</ItemGroup>
+	<ItemGroup>
 	  <None Update="appsettings.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>

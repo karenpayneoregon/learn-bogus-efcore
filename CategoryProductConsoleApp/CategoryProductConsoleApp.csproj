@@ -17,6 +17,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\CategoriesProductsLibrary\CategoriesProductsLibrary.csproj" />
+	  <ProjectReference Include="..\SpectreConsoleHelperLibrary\SpectreConsoleHelperLibrary.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

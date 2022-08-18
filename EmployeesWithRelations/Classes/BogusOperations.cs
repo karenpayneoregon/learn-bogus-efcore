@@ -68,15 +68,6 @@ namespace EmployeesWithRelationsLibrary.Classes
 
                 await context.SaveChangesAsync();
 
-                // TODO move to program main
-                var empList = await context
-                    .Employees
-                    .Include(x => x.ContactTypeIdentifierNavigation)
-                    .Include(x => x.InverseReportsToNavigationEmployee)
-                    .Include(x => x.ReportsToNavigationEmployee)
-                    .Include(x => x.CountryIdentifierNavigation)
-                    .ToListAsync();
-
                 return (true, null);
             }
             catch (Exception localException)
@@ -84,6 +75,19 @@ namespace EmployeesWithRelationsLibrary.Classes
                 return (false, localException);
             }
             
+        }
+
+        public static async Task<List<Employees>> ReadEmployeesList()
+        {
+            await using var context = new NorthWindContext();
+            return await context
+                .Employees
+                .Include(x => x.ContactTypeIdentifierNavigation)
+                .Include(x => x.InverseReportsToNavigationEmployee)
+                .Include(x => x.ReportsToNavigationEmployee)
+                .Include(x => x.CountryIdentifierNavigation)
+                .ToListAsync();
+
         }
     }
 }

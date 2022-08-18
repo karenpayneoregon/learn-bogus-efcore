@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using Bogus;
+using Bogus.Extensions.Canada;
+using Bogus.Extensions.UnitedStates;
 using ConfigurationLibrary.Classes;
 
 #nullable disable
@@ -42,8 +44,10 @@ namespace HasDataConsoleApp.Data
 
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
 
+            // seed for primary key
             var identifier = 1;
 
+            // setup to create data
             Faker<Product> products = new Faker<Product>()
                 .RuleFor(p => p.Id, f => identifier++)
                 .RuleFor(p => p.ProductName, f => f.Commerce.ProductName())
@@ -52,7 +56,8 @@ namespace HasDataConsoleApp.Data
 
             modelBuilder
                 .Entity<Product>()
-                .HasData(products.GenerateBetween(1000, 1000));
+                // generate data
+                .HasData(products.GenerateBetween(10, 10));
 
             OnModelCreatingPartial(modelBuilder);
         }
