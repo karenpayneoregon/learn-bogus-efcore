@@ -52,13 +52,13 @@ namespace EmployeesWithRelationsLibrary.Classes
                 await context.Database.EnsureDeletedAsync();
                 await context.Database.EnsureCreatedAsync();
 
+                var countryCount = CountriesList().Count();
+                var contactTypeCount = ContactTypeList().Count();
+
                 await context.AddRangeAsync(ContactTypeList());
                 await context.AddRangeAsync(CountriesList());
 
-                //await context.SaveChangesAsync();
 
-                var countryCount = context.Countries.Count();
-                var contactTypeCount = context.ContactType.Count();
                 
                 Faker<Employees> faker = new Faker<Employees>()
                     .RuleFor(e => e.FirstName, f => f.Person.FirstName)
@@ -70,13 +70,25 @@ namespace EmployeesWithRelationsLibrary.Classes
 
                 var list = faker.Generate(employeeCount);
                 await context.AddRangeAsync(list);
+
+
+
+                var employeesList = context.Employees.Where(x => x.EmployeeID > 1).ToList();
+                for (int index = 0; index < employeesList.Count; index++)
+                {
+                    employeesList[index].ReportsToNavigationEmployee = context.Employees.FirstOrDefault(x => x.EmployeeID == 1);
+                }
+
                 await context.SaveChangesAsync();
 
                 // TODO move to program main
                 var empList = await context
                     .Employees
                     .Include(x => x.ContactTypeIdentifierNavigation)
-                    .Include(x => x.CountryIdentifierNavigation).ToListAsync();
+                    .Include(x => x.InverseReportsToNavigationEmployee)
+                    .Include(x => x.ReportsToNavigationEmployee)
+                    .Include(x => x.CountryIdentifierNavigation)
+                    .ToListAsync();
 
                 return (true, null);
             }
