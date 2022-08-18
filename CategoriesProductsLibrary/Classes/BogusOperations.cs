@@ -20,7 +20,7 @@ namespace CategoriesProductsLibrary.Classes
         public static List<Products> ProductsList(int productCount, int categoryCount)
         {
             Faker<Products> fake = new Faker<Products>()
-                .RuleFor(p => p.ProductName, f => f.Commerce.ProductName())
+                .RuleFor(p => p.ProductName, f => f.Address.County())
                 .RuleFor(p => p.UnitPrice, f => f.Random.Decimal(10,45))
                 .RuleFor(p => p.UnitsInStock, f => f.Random.Short(1,5))
                 .RuleFor(p => p.CategoryId, f => f.Random.Int(1,categoryCount));

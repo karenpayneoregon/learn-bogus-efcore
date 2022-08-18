@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
+using EmployeesWithRelationsLibrary.Classes;
 
 namespace EmployeesWithRelationsConsoleApp
 {
     partial class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.ReadLine();
+            var (success, exception) = await BogusOperations.CreateDatabaseAndPopulate(10);
         }
     }
 }

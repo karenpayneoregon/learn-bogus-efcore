@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesWithRelationsLibra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesWithRelationsConsoleApp", "EmployeesWithRelationsConsoleApp\EmployeesWithRelationsConsoleApp.csproj", "{BEE33236-CB49-4CC3-A628-CFBC4AFD76FB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{47066D63-FA3F-46F9-809F-2F7447A4947F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHelperLibrary", "DataHelperLibrary\DataHelperLibrary.csproj", "{037E51AE-27E0-41B4-B221-D2F81D3CA877}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,9 +42,16 @@ Global
 		{BEE33236-CB49-4CC3-A628-CFBC4AFD76FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEE33236-CB49-4CC3-A628-CFBC4AFD76FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEE33236-CB49-4CC3-A628-CFBC4AFD76FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{037E51AE-27E0-41B4-B221-D2F81D3CA877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{037E51AE-27E0-41B4-B221-D2F81D3CA877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{037E51AE-27E0-41B4-B221-D2F81D3CA877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{037E51AE-27E0-41B4-B221-D2F81D3CA877}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{037E51AE-27E0-41B4-B221-D2F81D3CA877} = {47066D63-FA3F-46F9-809F-2F7447A4947F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46A1F692-20AE-4A3F-B077-24476D4BDEE2}
