@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CategoriesProductsLibrary.Classes;
 using CategoriesProductsLibrary.models;
+using CategoryProductConsoleApp.Classes;
 using Spectre.Console;
 
 namespace CategoryProductConsoleApp
@@ -11,12 +12,17 @@ namespace CategoryProductConsoleApp
     {
         static async Task Main(string[] args)
         {
-            await Task.Delay(0);
-            /*
-             * MUST run this at least once to create the database and populate
-             */
-            //await Initialize();
-            //await ReadProducts();
+            Prompts.PanelBorders();
+            if (Prompts.AskConfirmation($"[lightgreen]Do you want to continue?[/]"))
+            {
+                var count = Prompts.GetInt();
+                if (count >0)
+                {
+                    await Initialize(count);
+                    await ReadProducts();                    
+                }
+            }
+           
         }
 
         private static async Task ReadProducts()
@@ -47,25 +53,16 @@ namespace CategoryProductConsoleApp
         /// Create db and populate tables
         /// </summary>
         /// <returns></returns>
-        static async Task Initialize()
+        static async Task Initialize(int count)
         {
-            AnsiConsole.MarkupLine("[yellow]Creating and populating database[/]");
-            var (success, exception) = await BogusOperations.CreateDatabaseAndPopulate();
-            if (success)
-            {
-                AnsiConsole.Clear();
-                AnsiConsole.MarkupLine("[cyan]Created and populated[/]");
-            }
-            else
+            AnsiConsole.MarkupLine("[skyblue1]Creating and populating database[/]");
+            var (success, exception) = await BogusOperations.CreateDatabaseAndPopulate(count);
+            if (!success)
             {
                 AnsiConsole.Clear();
                 AnsiConsole.MarkupLine("[red]Failed to create and populated[/]");
                 Console.WriteLine(exception.Message);
             }
-
-            AnsiConsole.MarkupLine("[yellow]Press a key to continue[/]");
-            Console.ReadLine();
-
         }
 
     }

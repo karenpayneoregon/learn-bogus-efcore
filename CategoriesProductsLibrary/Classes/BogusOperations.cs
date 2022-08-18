@@ -28,7 +28,7 @@ namespace CategoriesProductsLibrary.Classes
             return fake.Generate(productCount);
         }
 
-        public static async Task<(bool success, Exception exception)> CreateDatabaseAndPopulate() 
+        public static async Task<(bool success, Exception exception)> CreateDatabaseAndPopulate(int productCount) 
         {
             try
             {
@@ -36,11 +36,10 @@ namespace CategoriesProductsLibrary.Classes
                 await context.Database.EnsureDeletedAsync();
                 await context.Database.EnsureCreatedAsync();
 
-                List<Categories> cats = CategoriesList();
-                await context.AddRangeAsync(cats);
-                await context.SaveChangesAsync();
+                List<Categories> categories = CategoriesList();
+                await context.AddRangeAsync(categories);
 
-                List<Products> products = BogusOperations.ProductsList(10, cats.Count);
+                List<Products> products = ProductsList(productCount, categories.Count);
                 await context.AddRangeAsync(products);
                 await context.SaveChangesAsync();
 
