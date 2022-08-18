@@ -24,10 +24,10 @@ namespace CategoryProductConsoleApp.Classes
 
         public static void PanelBorders()
         {
-            static IRenderable CreatePanel(string name, BoxBorder border)
+            static IRenderable CreatePanel(string headerText, BoxBorder border)
             {
                 return new Panel($"This application will create a new database defined by [cyan]EF Core[/] models with the [b]database[/] name in [b]appsettings.json[/]. You will be prompted to enter how many records to create then used to create Products followed by displaying the data.")
-                    .Header($" [cyan]{name}[/] ", Justify.Center)
+                    .Header($" [cyan]{headerText}[/] ", Justify.Center)
                     .Border(border)
                     .BorderStyle(Style.Parse("grey"))
                     .HeaderAlignment(Justify.Center);

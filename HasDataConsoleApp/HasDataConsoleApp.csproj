@@ -16,15 +16,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\EmployeesWithRelations\EmployeesWithRelationsLibrary.csproj" />
-	  <ProjectReference Include="..\SpectreConsoleHelperLibrary\SpectreConsoleHelperLibrary.csproj" />
+		<PackageReference Include="Spectre.Console" Version="0.44.0" />
+		<PackageReference Include="ConsoleHelperLibrary" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ConsoleHelperLibrary" Version="1.0.0" />
-		<PackageReference Include="Spectre.Console" Version="0.44.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.17" />
 	</ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="Bogus" Version="34.0.2" />
+		<PackageReference Include="ConfigurationLibrary" Version="1.0.1" />
+	</ItemGroup>
 	<ItemGroup>
 	  <None Update="appsettings.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
