@@ -13,35 +13,6 @@ namespace EmployeesWithRelationsLibrary.Classes
 {
     public class BogusOperations
     {
-        /// <summary>
-        /// We want specific contact types so no bogus
-        /// </summary>
-        /// <returns></returns>
-        public static List<ContactType> ContactTypeList() =>
-            new()
-            {
-                new () {ContactTitle = "Accounting Manager" },
-                new () {ContactTitle = "Assistant Sales Agent" },
-                new () {ContactTitle = "Assistant Sales Representative" },
-                new () {ContactTitle = "Marketing Assistant" },
-                new () {ContactTitle = "Marketing Manager" },
-                new () {ContactTitle = "Order Administrator" },
-                new () {ContactTitle = "Owner" },
-                new () {ContactTitle = "Owner/Marketing Assistant" },
-                new () {ContactTitle = "Sales Agent" },
-                new () {ContactTitle = "Sales Associate" },
-                new () {ContactTitle = "Sales Manager" },
-                new () {ContactTitle = "Sales Representative" },
-                new () {ContactTitle = "Vice President, Sales" }
-            };
-
-        public static List<Countries> CountriesList()
-        {
-            List<Countries> list = new();
-            Mocked.CountryNames().ForEach(x => list.Add(new Countries() {Name = x}));
-            return list;
-        }
-
 
         public static async Task<(bool success, Exception exception)> CreateDatabaseAndPopulate(int employeeCount)
         {
@@ -52,13 +23,11 @@ namespace EmployeesWithRelationsLibrary.Classes
                 await context.Database.EnsureDeletedAsync();
                 await context.Database.EnsureCreatedAsync();
 
-                var countryCount = CountriesList().Count();
-                var contactTypeCount = ContactTypeList().Count();
+                var countryCount = BogusChildren.CountriesList().Count();
+                var contactTypeCount = BogusChildren.ContactTypeList().Count();
 
-                await context.AddRangeAsync(ContactTypeList());
-                await context.AddRangeAsync(CountriesList());
-
-
+                await context.AddRangeAsync(BogusChildren.ContactTypeList());
+                await context.AddRangeAsync(BogusChildren.CountriesList());
                 
                 Faker<Employees> faker = new Faker<Employees>()
                     .RuleFor(e => e.FirstName, f => f.Person.FirstName)
@@ -71,9 +40,8 @@ namespace EmployeesWithRelationsLibrary.Classes
                 var list = faker.Generate(employeeCount);
                 await context.AddRangeAsync(list);
 
-
-
                 var employeesList = context.Employees.Where(x => x.EmployeeID > 1).ToList();
+
                 for (int index = 0; index < employeesList.Count; index++)
                 {
                     employeesList[index].ReportsToNavigationEmployee = context.Employees.FirstOrDefault(x => x.EmployeeID == 1);
