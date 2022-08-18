@@ -6,6 +6,8 @@ using Bogus;
 using DataHelperLibrary.Classes;
 using EmployeesWithRelationsLibrary.Data;
 using EmployeesWithRelationsLibrary.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace EmployeesWithRelationsLibrary.Classes
 {
@@ -40,7 +42,6 @@ namespace EmployeesWithRelationsLibrary.Classes
             return list;
         }
 
-        public static string[] Titles() => new[] { "Mr","Mrs" };
 
         public static async Task<(bool success, Exception exception)> CreateDatabaseAndPopulate(int employeeCount)
         {
@@ -54,7 +55,7 @@ namespace EmployeesWithRelationsLibrary.Classes
                 await context.AddRangeAsync(ContactTypeList());
                 await context.AddRangeAsync(CountriesList());
 
-                await context.SaveChangesAsync();
+                //await context.SaveChangesAsync();
 
                 var countryCount = context.Countries.Count();
                 var contactTypeCount = context.ContactType.Count();
@@ -62,7 +63,7 @@ namespace EmployeesWithRelationsLibrary.Classes
                 Faker<Employees> faker = new Faker<Employees>()
                     .RuleFor(e => e.FirstName, f => f.Person.FirstName)
                     .RuleFor(e => e.LastName, f => f.Person.LastName)
-                    .RuleFor(e => e.TitleOfCourtesy, f => f.Random.ArrayElement(Titles()))
+                    .RuleFor(e => e.TitleOfCourtesy, f => f.Random.ArrayElement(Mocked.Titles()))
                     .RuleFor(e => e.BirthDate, f => f.Person.DateOfBirth)
                     .RuleFor(e => e.ContactTypeIdentifier, f => f.Random.Int(1, contactTypeCount))
                     .RuleFor(e => e.CountryIdentifier, f => f.Random.Int(1, countryCount));
@@ -70,6 +71,12 @@ namespace EmployeesWithRelationsLibrary.Classes
                 var list = faker.Generate(employeeCount);
                 await context.AddRangeAsync(list);
                 await context.SaveChangesAsync();
+
+                // TODO move to program main
+                var empList = await context
+                    .Employees
+                    .Include(x => x.ContactTypeIdentifierNavigation)
+                    .Include(x => x.CountryIdentifierNavigation).ToListAsync();
 
                 return (true, null);
             }

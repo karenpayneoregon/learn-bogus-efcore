@@ -7,6 +7,12 @@ namespace DataHelperLibrary.Classes
     public class Mocked
     {
         /// <summary>
+        /// Person titles
+        /// </summary>
+        /// <returns></returns>
+        public static string[] Titles() => new[] { "Mr", "Mrs", "Miss", "Dr" };
+
+        /// <summary>
         /// List of country names in English
         /// </summary>
         /// <returns>country names</returns>

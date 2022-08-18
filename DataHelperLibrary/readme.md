@@ -1,3 +1,3 @@
 ﻿# About
 
-Provides data for use with Bogus
+Provides data for use with Bogus.
