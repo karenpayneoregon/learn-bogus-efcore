@@ -46,7 +46,7 @@ namespace CategoryProductConsoleApp
             foreach (var product in list)
             {
                 // ReSharper disable once PossibleInvalidOperationException
-                table.AddRow(product.ProductId.ToString(), product.ProductName, product.UnitPrice.Value.ToString("C2"), product.Category.CategoryName);
+                table.AddRow(product.ProductId.ToString(), product.ProductName, product.UnitPrice!.Value.ToString("C2"), product.Category.CategoryName);
             }
 
             AnsiConsole.Write(table);

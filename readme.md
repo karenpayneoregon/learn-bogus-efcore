@@ -1,7 +1,13 @@
 # Using EF Core and Bogus
 
+In this article with basic to intimidate code sample, learn how to generate data which can be used for working through data schemas along with Entity Framework Core (EF Core) using [Bogus](https://github.com/bchavez/Bogus).
 
-In this article with basic to intimidate code sample, learn how to generate data which can be used for working through data schemas along with Entity Framework Core (EF Core).
+What is Bogus? 
+
+*A simple fake data generator for C#, F#, and VB.NET. Based on and ported from the famed faker.js.*
+
+> **Note**
+> Code presented was originally written in VS2019, .NET Core 5 and has been updated to .NET Core 7, EF Core 7 using VS2022.
 
 The first step when working with databases is to plan out the schema which comes from business requirements. Once the schema is in place write SQL statements to validate all operations can be performed or some will want this done bypassing SQL statement and use their EF Core code. The other path is to test with SQL and EF Core.
 
@@ -10,11 +16,11 @@ Some will want to do this with a mocking framework and EF Core in-memory testing
 This is where Bogus NuGet package [![](assets/Link_16x.png)](https://www.nuget.org/packages/Bogus) comes into play. Bogus provides everything needed to create mocked data for your database. Check out their documentation and code samples to get an idea how to work with Bogus. There can be a problem with novice developers/coders in how to put everything together which is where this article will assist novice developers/coders.
 
 
-**Step 1**
+## Step 1
 
 Once the database has been created, scaffold/reverse engineer to create a DbContext and models
 
-**Step 2**
+## Step 2
 
 Write code to create the database and tables, the following code is used in each project.
 
@@ -67,7 +73,7 @@ public partial class Categories
 - We don't create primary keys, EF Core does this for us.
 
 
-**Step 3**
+## Step 3
 
 Code to generate a single category using Bogus where `f.Commerce.Categories(1)` selects one category name from an array, `[0]` indicates we want the first category name.
 
@@ -188,7 +194,7 @@ private static async Task ReadProducts()
 }
 ```
 
-# Protecting generated data
+## Protecting generated data
 
 Once data has been generated suppose you don't want to overwrite it? The following statement can tell us all tables are populated.
 
@@ -249,7 +255,7 @@ public static class EntityFrameworkExtensions
 ```
 
 
-# Summary
+## Summary
 
 This article provides code samples to fake/generate data with one example HasDataConsoleApp which generates data directly in the DbContext for a single table while the remaining projects show how to work with one to many models.
 
@@ -257,10 +263,14 @@ Take time to run each console project, study the code than read the readme file 
 
 :small_blue_diamond: I can not stress enough to read the documentation on Bogus rather than just work with provided code.
 
+## See also
+
+:pushpin:  [FluentValidation tips C#](https://dev.to/karenpayneoregon/fluentvalidation-tips-c-3olf)
+
 
 ## Requires
 
-- Microsoft Visual Studio 2019 or higher
-- .NET Core 5 or higher
+- Microsoft Visual Studio 2022 or higher
+- .NET Core 7 or higher
 - SQL-Server Express installed
 
