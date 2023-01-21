@@ -1,6 +1,6 @@
 # Using EF Core and Bogus
 
-In this article with basic to intimidate code sample, learn how to generate data which can be used for working through data schemas along with Entity Framework Core (EF Core) using [Bogus](https://github.com/bchavez/Bogus).
+In this article with basic to intermediate code sample, learn how to generate data which can be used for working through data schemas along with Entity Framework Core ([EF Core](https://learn.microsoft.com/en-us/ef/core/)) using [Bogus](https://github.com/bchavez/Bogus).
 
 What is Bogus? 
 
@@ -9,16 +9,16 @@ What is Bogus?
 > **Note**
 > Code presented was originally written in VS2019, .NET Core 5 and has been updated to .NET Core 7, EF Core 7 using VS2022.
 
-The first step when working with databases is to plan out the schema which comes from business requirements. Once the schema is in place write SQL statements to validate all operations can be performed or some will want this done bypassing SQL statement and use their EF Core code. The other path is to test with SQL and EF Core.
+The first step when working with databases is to plan out the schema which comes from business requirements. Once the schema is in place write SQL statements to validate all operations can be performed or some will want this done bypassing [SQL statement](https://learn.microsoft.com/en-us/sql/t-sql/statements/statements?view=sql-server-ver16) and use their EF Core code. The other path is to test with SQL and EF Core.
 
-Some will want to do this with a mocking framework and EF Core in-memory testing which doesn’t fully replicate working with databases.
+Some will want to do this with a mocking framework like [Progress Telerik JustMock](https://www.telerik.com/products/mocking.aspx) and EF Core [in-memory](https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli) testing which doesn’t fully replicate working with databases.
 
 This is where Bogus NuGet package [![](assets/Link_16x.png)](https://www.nuget.org/packages/Bogus) comes into play. Bogus provides everything needed to create mocked data for your database. Check out their documentation and code samples to get an idea how to work with Bogus. There can be a problem with novice developers/coders in how to put everything together which is where this article will assist novice developers/coders.
 
 
 ## Step 1
 
-Once the database has been created, scaffold/reverse engineer to create a DbContext and models
+Once the database has been created, [scaffold/reverse engineer](https://learn.microsoft.com/en-us/ef/core/managing-schemas/scaffolding/?tabs=dotnet-core-cli) to create a DbContext and models
 
 ## Step 2
 
@@ -69,13 +69,13 @@ public partial class Categories
 
 **Important notes**
 
-- Going forward, the secret to knowing were to find data is to read Bogus information in the readme file which goes into depth were to find paths to generate data. This is very important as you can clash with their classes e.g. you create a Person class and guess what, Bogus has a Person class. This is were knowing how to work with `using` statements and `using` statements with `aliasing`.
+- Going forward, the secret to knowing were to find data is to read [Bogus](https://github.com/bchavez/Bogus) information in the readme file which goes into depth were to find paths to generate data. This is very important as you can clash with their classes e.g. you create a Person class and guess what, Bogus has a Person class. This is were knowing how to work with `using` statements and `using` statements with `aliasing`.
 - We don't create primary keys, EF Core does this for us.
 
 
 ## Step 3
 
-Code to generate a single category using Bogus where `f.Commerce.Categories(1)` selects one category name from an array, `[0]` indicates we want the first category name.
+Code to generate a single category using [Bogus](https://github.com/bchavez/Bogus) where `f.Commerce.Categories(1)` selects one category name from an array, `[0]` indicates we want the first category name.
 
 Note there is a parameter which specifies how many records to create which defaults to 4.
 
@@ -205,7 +205,7 @@ WHERE    (SI.indid IN (0, 1)) AND T.name <> 'sysdiagrams'
 ORDER BY NumberOfRows DESC, TableName
 ```
 
-Basics to run in code
+**Basics to run in code**
 
 Place the query into a method as shown below
 
@@ -216,7 +216,7 @@ public class SqlStatements
 }
 ```
 
-Create a method to check if all tables are populated
+:pushpin:  Create a method to check if all tables are populated
 
 ```csharp
 public static bool TablesArePopulated()
@@ -254,6 +254,10 @@ public static class EntityFrameworkExtensions
 }
 ```
 
+## See also
+
+- [Learn DateOnly & TimeOnly](https://dev.to/karenpayneoregon/learn-dateonly-timeonly-23j0) which works with Bogu
+
 
 ## Summary
 
@@ -261,7 +265,7 @@ This article provides code samples to fake/generate data with one example HasDat
 
 Take time to run each console project, study the code than read the readme file at the Bogus GitHub repository [![](assets/Link_16x.png)](https://github.com/bchavez/Bogus) and note at the end of the readme page there are other free packages to enhance Bogus.
 
-:small_blue_diamond: I can not stress enough to read the documentation on Bogus rather than just work with provided code.
+:small_blue_diamond: I can not stress enough to read the documentation on [Bogus](https://github.com/bchavez/Bogus) rather than just work with provided code. See [featured in](https://github.com/bchavez/Bogus#featured-in) also.
 
 ## See also
 
